@@ -1,4 +1,8 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import edu.princeton.cs.algs4.Queue;
 
 public class Board {
     private int[][] tiles;
@@ -91,12 +95,37 @@ public class Board {
     }
 
     public Iterable<Board> neighbors(){
-        
+        Queue<Board> neighboringBoard = new Queue<>();
+        for(int i = 0 ; i < size ; i++){
+            for(int j = 0 ; j < size ; j++){
+                if(this.tiles[i][j] == 0){
+                    if(i>0 && j>0){
+                        Board dummyBoard = new Board(tiles); exch(dummyBoard,i,j,i-1,j);                        
+                        Board secDummyBoard = new Board(tiles); exch(secDummyBoard,i,j,i,j-1);
+                        neighboringBoard.enqueue(dummyBoard);neighboringBoard.enqueue(secDummyBoard);
+                    }
+                    if(i<size-1 && j<size-1){
+                        Board dummyBoard = new Board(tiles); exch(dummyBoard, i, j, i+1, j);
+                        Board secDummyBoard = new Board(tiles); exch(secDummyBoard,i,j,i,j+1);
+                        neighboringBoard.enqueue(dummyBoard);neighboringBoard.enqueue(secDummyBoard);
+                    }
+                    if(i == 0 && j == size -1){
+                        Board dummyBoard = new Board(tiles); exch(dummyBoard, i, j, 0, size - 2);
+                        Board secDummyBoard = new Board(tiles); exch(secDummyBoard,i,j,1,size -1);
+                        neighboringBoard.enqueue(dummyBoard);neighboringBoard.enqueue(secDummyBoard);
+                    }
+                    if(i == size - 1 && j == 0){
+                        Board dummyBoard = new Board(tiles); exch(dummyBoard, i, j, size - 2, 0);
+                        Board secDummyBoard = new Board(tiles); exch(secDummyBoard,i,j,)
+                    }
+                }
+            }
+        }
     }
 
-    // private void exch(){
 
-    // }
+    private void exch(Board dummyBoard, int i, int j, int i2, int j2) {
+    }
 
     public static void main(String[] args) {
         int[][] tiles = new int[3][3];
